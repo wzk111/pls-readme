@@ -1,137 +1,125 @@
-```md
-# pls-readme
+# 📝 pls-readme
 
-Generate a clean, structured README.md draft for any local repository — in seconds.
+Generate a clean, structured `README.md` draft for any local repository — in seconds.
 
-pls-readme scans your project structure, infers the tech stack, and produces a well-organized README draft so you can focus on building, not documenting.
+> **pls-readme** scans your project structure, infers the tech stack, and produces a well-organized README draft so you can focus on building, not documenting.
 
---------------------------------------------------
+---
 
-FEATURES
+## ✨ Features
 
-- Scans repository structure (src/, include/, tests/, etc.)
-- Infers tech stack from file types and build configs
-- Generates a readable, standard README draft
-- Optional directory tree rendering
-- Safe by default (preview first, overwrite only with confirmation)
-- Fast, local, no external dependencies
+* **📂 Structure Scanning** – Automatically parses folders like `src/`, `include/`, and `tests/`.
+* **🧠 Tech Stack Inference** – Detects languages and tools from file extensions and build configs.
+* **🧾 Standardized Output** – Generates a readable, industry-standard README template.
+* **🌳 Tree Rendering** – Optional visual directory tree for better project visualization.
+* **🔒 Safe by Default** – Previews changes first; overwrites only with explicit confirmation.
+* **⚡ Zero Dependencies** – Fast, local execution with no external API calls required.
 
---------------------------------------------------
+---
 
-QUICK START
+## 🚀 Quick Start
 
-INSTALLATION
+### Installation
 
-git clone https://github.com/your-username/pls-readme.git
+```bash
+git clone https://github.com/wzk111/pls-readme.git
 cd pls-readme
 pip install -e .
+```
 
-GENERATE A README DRAFT
+### Generate a Draft
 
+To scan a project and generate `README.generated.md`:
+
+```bash
 pls-readme /path/to/your/project
+```
 
-This will generate:
+### Overwrite Existing README
 
-README.generated.md
+To update your existing `README.md` (requires manual confirmation):
 
-OVERWRITE EXISTING README.md (WITH CONFIRMATION)
-
+```bash
 pls-readme /path/to/your/project --write
 
---------------------------------------------------
+```
 
-USAGE
+---
 
+## 🛠 Usage
+
+```bash
 pls-readme [REPO_PATH] [OPTIONS]
 
-OPTIONS
+```
 
--o, --output PATH
-    Output file path (default: README.generated.md)
+### Options
 
---write
-    Overwrite README.md in target repo
+| Option | Description | Default |
+| --- | --- | --- |
+| `-o, --output PATH` | Set a custom output file path | `README.generated.md` |
+| `--write` | Overwrite the existing `README.md` in target repo | `False` |
+| `--include-hidden` | Include hidden files and folders in the scan | `False` |
+| `--max-files N` | Max number of files to scan | `5000` |
+| `--depth N` | Max folder depth to scan | `6` |
+| `--no-tree` | Disable directory tree rendering | `Enabled` |
 
---include-hidden
-    Include hidden files and folders
+---
 
---max-files N
-    Max number of files to scan (default: 5000)
+## 🏗 Generated Structure
 
---depth N
-    Max folder depth to scan (default: 6)
+The tool produces a structured document containing:
 
---no-tree
-    Disable directory tree rendering
+1. **Project Name** & **Overview**
+2. **Repo Stats** (Scan metrics)
+3. **Tech Stack** (Inferred tools)
+4. **Language Breakdown** (%)
+5. **Project Structure** (Visual tree)
+6. **How to Run** (Inferred from build files)
+7. **Notes** & **Future Improvements**
 
---------------------------------------------------
+---
 
-GENERATED README STRUCTURE
+## ⚙️ How It Works
 
-The generated README follows this structure:
+1. **Recursive Scan:** Navigates the repository while respecting your `depth` and `file limit` settings.
+2. **Language Detection:** Maps file extensions to their respective programming languages.
+3. **Build System ID:** Identifies markers like `CMakeLists.txt`, `package.json`, or `requirements.txt`.
+4. **Heuristic Analysis:** Suggests "How to Run" instructions based on detected entry points.
+5. **Markdown Rendering:** Compiles all data into a clean, formatted `.md` file.
 
-# Project Name
-## Overview
-## Repo Stats
-## Tech Stack
-## Language Breakdown
-## Project Structure
-## How to Run
-## Notes
-## Future Improvements
+---
 
---------------------------------------------------
+## 🗺 Roadmap
 
-EXAMPLE OUTPUT
+* [ ] **.gitignore Support:** Automatically skip files ignored by git.
+* [ ] **Smart Entrypoints:** Better detection for `main.py`, `app.js`, and CMake targets.
+* [ ] **Remote Scanning:** Support for scanning GitHub URLs directly.
+* [ ] **Dynamic Badges:** Add CI status, coverage, and license badges automatically.
+* [ ] **AI Summary:** Optional integration for LLM-generated project descriptions.
 
-Repo Stats
-- Files scanned: 1,248
-- Directories scanned: 96
-- Key folders: src, tests, docs
+---
 
-Tech Stack
-- Python (214 files)
-- JavaScript (98 files)
-- CMake
+## 🤝 Contributing
 
---------------------------------------------------
+Contributions are what make the open-source community such an amazing place to learn, inspire, and create.
 
-HOW IT WORKS
+1. **Fork** the Project
+2. Create your **Feature Branch** (`git checkout -b feature/AmazingFeature`)
+3. **Commit** your Changes (`git commit -m 'Add some AmazingFeature'`)
+4. **Push** to the Branch (`git push origin feature/AmazingFeature`)
+5. Open a **Pull Request**
 
-1. Recursively scans the repository (respecting depth & file limits)
-2. Detects programming languages via file extensions
-3. Identifies common build systems (CMake, npm, pip)
-4. Applies heuristics to suggest "How to Run"
-5. Renders everything into a Markdown README draft
+---
 
---------------------------------------------------
+## 📄 License
 
-ROADMAP
+Distributed under the **MIT License**. See `LICENSE` for more information.
 
-- Support .gitignore rules
-- Smarter entrypoint detection (main.py, app.js, CMake targets)
-- GitHub URL scanning (remote repos)
-- README badges (CI, coverage, license)
-- Optional AI-assisted project summary
+---
 
---------------------------------------------------
-
-CONTRIBUTING
-
-1. Fork the repository
-2. Create a feature branch
-3. Add tests if applicable
-4. Submit a pull request with a clear description
-
---------------------------------------------------
-
-LICENSE
-
-MIT License
-
---------------------------------------------------
-
-ACKNOWLEDGEMENTS
+## ❤️ Acknowledgements
 
 Built with love to make documentation less painful for developers.
-```
+
+---
