@@ -66,7 +66,7 @@ pls-readme [REPO_PATH] [OPTIONS]
 
 | Option | Description | Default |
 | --- | --- | --- |
-| `--github OWNER/REPO` | Generate GitHub badges using the given repository | (disabled) |
+| `--github OWNER/REPO` | Generate GitHub badges using the given repository | `Disabled` |
 | `-o, --output PATH` | Set a custom output file path | `README.generated.md` |
 | `--write` | Overwrite the existing `README.md` in target repo | `False` |
 | `--include-hidden` | Include hidden files and folders in the scan | `False` |
