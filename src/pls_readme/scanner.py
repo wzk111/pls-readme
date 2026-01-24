@@ -1,10 +1,11 @@
 from __future__ import annotations
 from dataclasses import dataclass, field
 from pathlib import Path
-from typing import Dict, List, Tuple
+from typing import Dict, List
 from collections import Counter
 
 from .utils import should_ignore
+from .gitignore import load_gitignore_spec
 
 EXT_TO_LANG = {
     ".py": "Python",
@@ -56,6 +57,7 @@ def scan_repo(
     include_hidden: bool = False,
     max_files: int = 5000,
     depth: int = 6,
+    respect_gitignore: bool = True,
 ) -> RepoScan:
     repo_path = repo_path.resolve()
     if not repo_path.exists() or not repo_path.is_dir():
@@ -63,6 +65,9 @@ def scan_repo(
 
     max_files = max(1, max_files)
     depth = max(1, depth)
+
+    # NEW: load .gitignore matcher once
+    ignore = load_gitignore_spec(repo_path) if respect_gitignore else None
 
     lang_counter: Counter[str] = Counter()
     file_count = 0
@@ -72,14 +77,28 @@ def scan_repo(
     top_files: List[str] = []
 
     def within_depth(p: Path) -> bool:
-        # depth relative to repo root: repo (level 0), repo/a (1), repo/a/b (2) ...
         rel_parts = p.relative_to(repo_path).parts
         return len(rel_parts) <= depth
+
+    def is_gitignored(p: Path) -> bool:
+        if ignore is None:
+            return False
+        rel = p.relative_to(repo_path).as_posix()
+        if p.is_dir() and not rel.endswith("/"):
+            rel_dir = rel + "/"
+            return ignore.match_rel(rel_dir) or ignore.match_rel(rel)
+        return ignore.match_rel(rel)
 
     for p in repo_path.rglob("*"):
         if not within_depth(p):
             continue
+
+        # your existing "hidden + common folders" ignore
         if should_ignore(p, include_hidden=include_hidden):
+            continue
+
+        # NEW: skip gitignored paths
+        if is_gitignored(p):
             continue
 
         if p.is_dir():
@@ -92,6 +111,7 @@ def scan_repo(
             file_count += 1
             if file_count <= 30:
                 top_files.append(str(p.relative_to(repo_path)))
+
             if file_count >= max_files:
                 break
 

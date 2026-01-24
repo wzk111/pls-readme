@@ -35,6 +35,15 @@ To scan a project and generate `README.generated.md`:
 pls-readme /path/to/your/project
 ```
 
+### Generate With Real GitHub Badges
+
+To generate `README.generated.md` with your real github badges (requires manual confirmation):
+
+```bash
+pls-readme /path/to/your/project --github username/repo
+
+```
+
 ### Overwrite Existing README
 
 To update your existing `README.md` (requires manual confirmation):
@@ -57,12 +66,14 @@ pls-readme [REPO_PATH] [OPTIONS]
 
 | Option | Description | Default |
 | --- | --- | --- |
+| `--github OWNER/REPO` | Generate GitHub badges using the given repository | (disabled) |
 | `-o, --output PATH` | Set a custom output file path | `README.generated.md` |
 | `--write` | Overwrite the existing `README.md` in target repo | `False` |
 | `--include-hidden` | Include hidden files and folders in the scan | `False` |
 | `--max-files N` | Max number of files to scan | `5000` |
 | `--depth N` | Max folder depth to scan | `6` |
 | `--no-tree` | Disable directory tree rendering | `Enabled` |
+| `--no-gitignore` | Do not respect `.gitignore` rules during scanning | `False` |
 
 ---
 

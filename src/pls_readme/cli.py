@@ -19,15 +19,18 @@ def build_parser() -> argparse.ArgumentParser:
     p.add_argument("--max-files", type=int, default=5000, help="Max files to scan (default: 5000).")
     p.add_argument("--depth", type=int, default=6, help="Max folder depth to scan (default: 6).")
     p.add_argument("--no-tree", action="store_true", help="Disable directory tree rendering.")
+    p.add_argument("--no-gitignore", action="store_true", help="Do not respect .gitignore rules (scan everything except built-in ignores).")
+    p.add_argument("--github", metavar="OWNER/REPO", help="GitHub repository in the form OWNER/REPO (used to generate badges).")
     return p
 
 def main(argv: list[str] | None = None) -> int:
     args = build_parser().parse_args(argv)
 
     repo_path = Path(args.repo).resolve()
-    scan = scan_repo(repo_path, include_hidden=args.include_hidden, max_files=args.max_files, depth=args.depth)
+    scan = scan_repo(repo_path, include_hidden=args.include_hidden, max_files=args.max_files, depth=args.depth, respect_gitignore=(not args.no_gitignore))
     sug = infer_suggestions(scan)
-    md = render_markdown(scan, sug, depth=args.depth, include_hidden=args.include_hidden, show_tree=(not args.no_tree))
+    md = render_markdown(scan, sug, depth=args.depth, include_hidden=args.include_hidden, show_tree=(not args.no_tree), github_repo=args.github)
+
 
     if args.write:
         out_path = repo_path / "README.md"
