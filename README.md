@@ -1,8 +1,8 @@
-# 📝 pls-readme
+# pls-readme
 
-Generate a clean, structured `README.md` draft for any local repository — in seconds.
+**pls-readme** is a lightweight CLI tool that scans a repository and generates a clean,  
+structured `README.md` draft — so developers can focus on code, not boilerplate documentation.
 
-> **pls-readme** scans your project structure, infers the tech stack, and produces a well-organized README draft so you can focus on building, not documenting.
 
 ---
 
