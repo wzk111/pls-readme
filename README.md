@@ -91,6 +91,52 @@ The tool produces a structured document containing:
 
 ---
 
+## Example Output (what `pls-readme` generates)
+
+<details>
+<summary>Click to expand an example <code>README.generated.md</code></summary>
+
+```md
+# my-awesome-repo
+
+![Repo Size](https://img.shields.io/github/repo-size/username/repo?style=for-the-badge&color=blue)
+![Languages](https://img.shields.io/github/languages/count/username/repo?style=for-the-badge&color=orange)
+![Forks](https://img.shields.io/github/forks/username/repo?style=for-the-badge&color=brightgreen)
+![Issues](https://img.shields.io/github/issues/username/repo?style=for-the-badge&color=red)
+
+---
+
+![Project Screenshot](https://via.placeholder.com/800x400.png?text=Project+Screenshot)
+
+> Replace this block with a 2–3 line introduction about what the project does.
+
+---
+
+## Repo Stats
+- **Files scanned:** 1,234
+- **Directories scanned:** 56
+- **Key folders:** src, tests, docs
+
+## Tech Stack
+- Python
+- Poetry
+- Pytest
+
+## Language Breakdown
+- Python: 120 file(s)
+- Markdown: 8 file(s)
+
+## Project Structure
+```text
+my-awesome-repo/
+├── src/
+│   └── ...
+├── tests/
+│   └── ...
+└── README.md
+```
+</details>
+
 ## ⚙️ How It Works
 
 1. **Recursive Scan:** Navigates the repository while respecting your `depth` and `file limit` settings.
